@@ -6,7 +6,6 @@
  */
 
 jQuery.ajaxTransport('arraybuffer', function(/** !jQueryAjaxSettingsExtra */ options, /** !jQueryAjaxSettings */ originalOptions, /** !jQuery.jqXHR */ jqXHR) {
-	
 	/** @type {number} */
 	var xhrId = 0;
 	/** @type {!IObject<number,!ArrayBufferCallback>} */
@@ -36,7 +35,7 @@ jQuery.ajaxTransport('arraybuffer', function(/** !jQueryAjaxSettingsExtra */ opt
 		var callback = null;
 
 		return {
-			send: function(/** !IObject<string,string> */ headers, /** function(number, string, !IObject<string,string>=, string=):undefined */ complete ) {
+			send: function(/** !IObject<string,string> */ headers, /** function(number, string, !IObject<string,*>=, string=):undefined */ complete ) {
 				/** @type {string} */
 				var i;
 				/** @type {!XMLHttpRequest} */
@@ -88,10 +87,10 @@ jQuery.ajaxTransport('arraybuffer', function(/** !jQueryAjaxSettingsExtra */ opt
 					}
 				}
 
-				// Do send the request
-				// This may raise an exception which is actually
-				// handled in jQuery.ajax (so no try/catch here)
 				(/** @suppress {checkTypes} */ function() {
+					// Do send the request
+					// This may raise an exception which is actually
+					// handled in jQuery.ajax (so no try/catch here)
 					xhr.send( ( options.hasContent && options.data ) || null );
 				})();
 
@@ -121,15 +120,9 @@ jQuery.ajaxTransport('arraybuffer', function(/** !jQueryAjaxSettingsExtra */ opt
 							responses = {};
 							status = xhr.status;
 
-							if (options.dataType === "arraybuffer") {
+							try {
 								responses.arraybuffer = xhr.response;
-							}
-							// Support: IE<10
-							// Accessing binary-data responseText throws an exception
-							// (#11426)
-							else if ( typeof xhr.responseText === "string" ) {
-								responses.text = xhr.responseText;
-							}
+							} catch (e) {};
 
 							// Firefox throws an exception when accessing
 							// statusText for faulty cross-domain requests
@@ -147,7 +140,7 @@ jQuery.ajaxTransport('arraybuffer', function(/** !jQueryAjaxSettingsExtra */ opt
 							// (success with no data won't get notified, that's the best we
 							// can do given current implementations)
 							if ( !status && options.isLocal && !options.crossDomain ) {
-								status = responses.text ? 200 : 404;
+								status = responses.arraybuffer ? 200 : 404;
 
 							// IE - #1450: sometimes returns 1223 when it should be 204
 							} else if ( status === 1223 ) {
