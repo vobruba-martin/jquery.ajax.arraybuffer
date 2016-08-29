@@ -15,4 +15,9 @@ function ArrayBufferResponses() {};
 ArrayBufferResponses.prototype.arraybuffer;
 
 
+/** @type {boolean} */
+jQueryAjaxSettings.prototype.hasContent;
+
+
+/** @type {function(string, !Function)} */
 jQuery.ajaxTransport;
