@@ -87,12 +87,10 @@ jQuery.ajaxTransport('arraybuffer', function(/** !jQueryAjaxSettingsExtra */ opt
 					}
 				}
 
-				(/** @suppress {checkTypes} */ function() {
-					// Do send the request
-					// This may raise an exception which is actually
-					// handled in jQuery.ajax (so no try/catch here)
-					xhr.send( ( options.hasContent && options.data ) || null );
-				})();
+				// Do send the request
+				// This may raise an exception which is actually
+				// handled in jQuery.ajax (so no try/catch here)
+				xhr.send( ( options.hasContent && /** @type {string} */ (options.data) ) || null );
 
 				// Listener
 				callback = function(/** *= */ _, /** boolean= */ isAbort ) {
