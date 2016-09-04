@@ -1,5 +1,9 @@
 # jquery.ajax.arraybuffer
+With this plugin you can handle ArrayBuffer responses.
 
+How to use it?
+--------------
+Simply set `dataType` to `arraybuffer`:
 ```javascript
 $.ajax({
     url: url,
