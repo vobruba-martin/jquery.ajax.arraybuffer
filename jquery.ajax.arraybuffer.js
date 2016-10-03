@@ -51,6 +51,9 @@ jQuery.ajaxTransport('arraybuffer', function(/** !jQueryAjaxSettingsExtra */ opt
 					options.username,
 					options.password
 				);
+				
+				// Has to be set after .open, otherwise IE fails
+				xhr.responseType = 'arraybuffer';
 
 				// Apply custom fields if provided
 				if ( options.xhrFields ) {
