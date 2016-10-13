@@ -14,6 +14,9 @@ function ArrayBufferResponses() {};
 /** @type {(undefined|!ArrayBuffer)} */
 ArrayBufferResponses.prototype.arraybuffer;
 
+/** @type {(undefined|!Blob)} */
+ArrayBufferResponses.prototype.blob;
+
 
 /** @type {boolean} */
 jQueryAjaxSettings.prototype.hasContent;
