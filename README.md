@@ -52,7 +52,7 @@ Supported browsers
 | Edge            | Yes         | Yes  |
 | Opera           | 11.60+      | 12+  |
 | Opera mini      | No          | No   |
-| Opera mini      | Yes         | Yes  |
+| Opera Mobile    | Yes         | Yes  |
 | Safari          | 5+          | 5+   |
 | Safari iOS      | 5.1+        | 5.1+ |
 | Android Browser | 3+          | 4.4+ |
